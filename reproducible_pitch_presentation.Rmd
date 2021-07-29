@@ -1,0 +1,39 @@
+---
+title: "Shiny Application and Reproducible Pitch Presentation"
+output:
+  slidy_presentation: default
+  ioslides_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Objective
+This project has two parts. First, to create a Shiny application and deploy it on Rstudio's servers. Second, use Slidify or Rstudio Presenter to prepare a reproducible pitch presentation about the application.
+
+## Introduction to the shiny application
+As stated in the slide previously, data("faithful") was used to predict eruption time based on waiting time to next eruption. A linear model was fit. 
+To run the shiny app, simply run both the ui.R and server.R in the github link below:
+https://github.com/yulun98/Developing_Data_Products
+
+## Application of the shiny application
+Upon running, simply using the slider input in the side panel of the application to choose the waiting time to next eruption, and the predicted eruption time will be shown in the main panel.
+
+In the main panel, a graph was also drawn and the linear model can be shown by chekcking the checkbox in the side panel. 
+
+## Graph
+The following graph is the plot of eruption time vs waitin time to next eruption used in the shiny application
+```{r, echo=FALSE}
+set.seed(1234)
+suppressPackageStartupMessages(library(dplyr))
+suppressPackageStartupMessages(library(plotly))
+suppressPackageStartupMessages(library(ggplot2))
+suppressPackageStartupMessages(library(caret))
+data("faithful")
+plot(faithful$waiting, faithful$eruptions,
+             xlab = "Waiting time to next eruption (in mins)", 
+             ylab = "Eruption time", xlim = c(43,96), ylim = c(1.3,5.4))
+model <- lm(eruptions~waiting, data=faithful)
+abline(model, col="purple", lwd=2)
+```
